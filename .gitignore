@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ML artifacts
+real_churn_model.joblib
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.onnx
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Frontend (Vite)
+frontend/dist/
+.vite/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Service 1: Python FastAPI ML Engine
+  fastapi-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: churn_fastapi_engine
+    ports:
+      - "8000:8000"
+    networks:
+      - churn-network
+
+  # Service 2: Node.js Express Gateway
+  express-gateway:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: churn_express_gateway
+    ports:
+      - "5000:5000"
+    environment:
+      - FASTAPI_URL=http://fastapi-engine:8000
+    depends_on:
+      - fastapi-engine
+    networks:
+      - churn-network
+
+  # Service 3: React Frontend UI
+  frontend-ui:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: churn_frontend_ui
+    ports:
+      - "80:80"
+    depends_on:
+      - express-gateway
+    networks:
+      - churn-network
+
+networks:
+  churn-network:
+    driver: bridge
